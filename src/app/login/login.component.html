@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-content>
+      
+        <div class="head">
+            <h2>Login Page</h2>
+        </div>
+        <form [formGroup]="formdata" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" formControlName="emailid" required>
+                <div class="red" *ngIf="formdata.get('emailid')?.hasError('required')&& formdata.get('emailid')?.touched ">please enter your email</div>
+            </mat-form-field>
+           
+
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="passwd" required>
+                <div class="red" *ngIf="formdata.get('passwd')?.hasError('required')&&formdata.get('passwd')?.touched">please enter your password</div>
+            </mat-form-field>
+            <button mat-raised-button>Login</button>
+            <a routerLink="./register" >Register</a>
+           
+        </form>
+       
+    </mat-card-content>
+</mat-card>
