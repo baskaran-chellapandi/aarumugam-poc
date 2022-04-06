@@ -1,0 +1,113 @@
+<mat-card>
+    <mat-card-content>
+        <div class="head">
+            <h2>Register Page</h2>
+        </div>
+        <form [formGroup]="formdata" (ngSubmit)="onCreate()">
+            <mat-form-field class="full-width">
+                <mat-label>User name</mat-label>
+                <input matInput type="text" formControlName="user" required>
+                <span class="red"
+                    *ngIf="formdata.get('user')?.hasError('required')&& formdata.get('user')?.touched ">please enter
+                    your username</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>First name</mat-label>
+                <input matInput type="text" formControlName="fname" required>
+                <span class="red"
+                    *ngIf="formdata.get('fname')?.hasError('required')&& formdata.get('fname')?.touched ">please enter
+                    your firstname</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Last name</mat-label>
+                <input matInput type="text" formControlName="lname" required>
+                <span class="red"
+                    *ngIf="formdata.get('lname')?.hasError('required')&& formdata.get('lname')?.touched ">please enter
+                    your lastname</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" formControlName="emailid" required>
+                <span class="red"
+                    *ngIf="formdata.get('emailid')?.hasError('required')&& formdata.get('emailid')?.touched ">please
+                    enter your email</span>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="passwd" required>
+                <span class="red"
+                    *ngIf="formdata.get('passwd')?.hasError('required')&&formdata.get('passwd')?.touched">please enter
+                    your password</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Conform Password</mat-label>
+                <input matInput type="password" formControlName="cpasswd" required>
+                <span class="red"
+                    *ngIf="formdata.get('cpasswd')?.hasError('required')&&formdata.get('cpasswd')?.touched">please enter
+                    your password</span>
+                    <!-- <div *ngIf="formdata.get('cpasswd')?.hasError('confirmPasswordValidator')">Passsword and
+                        Confirm Password didn't match. </div> -->
+                <!-- <span class="red" *ngIf="formdata.get('cpasswd')?.hasError('MustMatch')"> password did not match</span> -->
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label> Address</mat-label>
+                <input matInput type="text" formControlName="add" required>
+                <span class="red"
+                    *ngIf="formdata.get('add')?.hasError('required')&& formdata.get('add')?.touched ">please
+                    enter your Address</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="number" type="number" required>
+                <span class="red"
+                    *ngIf="formdata.get('number')?.hasError('required') && formdata.get('number')?.touched">please enter
+                    your number</span>
+            </mat-form-field>
+                        <mat-form-field class="full-width">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" type="text" required>
+                <span class="red"
+                    *ngIf="formdata.get('city')?.hasError('required') && formdata.get('city')?.touched">please enter
+                    your city name</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="state">
+                    <mat-option value="one" >TamilNadu</mat-option>
+                    <mat-option value="two" >Kerala</mat-option>
+                    <mat-option value="three">Goa</mat-option>
+                    <mat-option value="four" >Ladakh</mat-option>
+                 <!--<span class="red" 
+                     *ngIf="formdata.get('state')?.hasError('required') && formdata.get('state')?.touched">please select
+                   your state</span>  -->
+                  </mat-select>
+
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Zip</mat-label>
+                <input matInput formControlName="zip" type="number" required>
+                <span class="red"
+                    *ngIf="formdata.get('zip')?.hasError('required') && formdata.get('zip')?.touched">please enter
+                    your zip number</span>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="descrip" required></textarea>
+                <span class="red" *ngIf="formdata.get('descrip')?.hasError('required')&& formdata.get('descrip')?.touched ">please enter some Description
+
+                </span>
+              </mat-form-field><br>
+        
+            <mat-form-field class="full-width">
+                <mat-label>File upload</mat-label>
+                <input matInput disabled>
+                <input type="file" formControlName="profile" (change)="onFileSelected($event)">
+                <img [src]="base" >
+            </mat-form-field>
+            <button mat-raised-button [disabled]="!formdata.valid">Register</button>
+            <a routerLink="">Cancel</a>
+
+        </form>
+    </mat-card-content>
+</mat-card>

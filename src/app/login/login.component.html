@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-content>
+
+        <div class="head">
+            <h2>Login Page</h2>
+        </div>
+        <form [formGroup]="formdata" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" formControlName="emailid" required>
+                <div class="red"
+                    *ngIf="formdata.get('emailid')?.hasError('required')&& formdata.get('emailid')?.touched ">please
+                    enter your email</div>
+            </mat-form-field>
+
+
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="passwd" required>
+                <div class="red" *ngIf="formdata.get('passwd')?.hasError('required')&&formdata.get('passwd')?.touched">
+                    please enter your password</div>
+            </mat-form-field>
+            <button mat-raised-button>Login</button>
+            <a routerLink="./register">Register</a>
+
+        </form><br>
+        <div class="jumbotron bg-transparent text-center">
+            <div *ngIf="!user" class="head">
+
+                <div class="card-block">
+                    <button mat-raised-button  (click)="signInWithFB()" style="background-color: blue;color: white;">
+                       Sign up with Facebook
+                    </button><br><br>
+                    <button mat-raised-button style="background-color: red;color: white;" (click)="signInWithGoogle()">
+                     Sign up with Google
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="user" class="card text-center">
+                <h6 class="card-header">
+                    Social Login Demo
+                </h6>
+                <div class="card-block"></div>
+                <img class="card-img-top img-responsive photo" src="{{ user.photoUrl }}" />
+                <div class="card-block">
+                    <h4 class="card-title">{{ user.name }}</h4>
+                    <p class="card-text">{{ user.email }}</p>
+                </div>
+                <div class="card-block">
+                    <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-card-content>
+</mat-card>

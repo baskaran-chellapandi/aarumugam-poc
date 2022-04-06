@@ -1,0 +1,44 @@
+
+  
+<div >
+
+    <h4>
+        <mat-toolbar  class="task-header">
+            <span> Create Post</span>
+            <span class="fx-spacer"></span>
+            <button mat-icon-button [mat-dialog-close]="true" >
+                <mat-icon mat-list-icon >close</mat-icon>
+            </button>
+        </mat-toolbar>
+    </h4>
+
+<!-- <mat-divider></mat-divider> -->
+
+<form [formGroup]="formValue"  (ngSubmit)="postData()">
+    <img class="postImage" src="{{image}}" >
+<textarea rows="4"  matInput formControlName="quotes" placeholder="Write something..." name="message"
+    [(ngModel)]="message" style=" border: none;
+    outline: none;
+    font-size: medium;
+    font-style: normal;
+    width: 70%;"></textarea><br>
+
+<mat-divider></mat-divider>
+<div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="5px">
+<input type="text" formControlName="time" hidden>
+<a (click)="toggleEmojiPicker()" class="emoji-mart" fxFlex color="accent">  Feeling/Activity</a>
+<emoji-mart *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+<input #fileInput type="file"  accept="image/*" multiple  hidden formControlName="post" (change)="onImageUpload($event)">
+<a class="photobutton" (click)="fileInput.click()" fxFlex color="accent">
+    Upload Image</a>
+<mat-divider></mat-divider>
+</div><br>
+
+<img class="inputImage"*ngFor='let url of urls' [src]="url">
+
+<mat-divider></mat-divider><br>
+<button class="footer"  mat-raised-button color="primary"ng-disabled="buttonClicked" (click)="refresh()">Post</button>
+</form>
+
+
+</div>

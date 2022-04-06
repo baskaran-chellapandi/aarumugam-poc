@@ -1,0 +1,128 @@
+<mat-toolbar style="max-height: 50px;">
+  <span>User Profile</span>
+  <span class="example-spacer"></span>
+
+    <nav>
+      <ul>
+       <li> <img class="image"  src="{{data?.profile}}"></li>
+        <li >{{data?.user}}
+           <ul>
+            <li  (click)="openDialog()">Post</li><br>
+            <li> <mat-icon >settings</mat-icon>Settings</li><br>
+            <li (click)="logout()">  <mat-icon>logout</mat-icon>Logout</li>
+          </ul>
+          </li>
+        <li><mat-icon class="arrow">arrow_drop_down</mat-icon></li>
+      </ul>
+    </nav>
+
+
+</mat-toolbar>
+
+
+ <div fxLayout.xs="column" fxLayoutAlign="center">
+  <mat-card class="main">
+    <mat-card-content>
+      <div class="navg">
+        <img class="img" src="{{data?.profile}}" width="100px"><br>
+        <h3 style="text-transform: capitalize;font-weight:500;">{{data?.user}}</h3>
+        <a href="mailto:{{data?.emailid}}">{{data?.emailid}}</a>
+      </div>
+      <span style="font-weight: 450;"> Description</span>
+      <p>{{data?.descrip}}</p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="abcd" >
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit('success')">
+        <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="5px">
+          <mat-form-field class="full-width" fxFlex color="accent">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="emailid" required>
+            <span class="red" *ngIf="form.get('emailid')?.hasError('required')&& form.get('emailid')?.touched ">please
+              enter your email</span>
+            <span class="red" *ngIf="form.get('emailid')?.invalid">please enter valid email </span>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex color="accent">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="user" required>
+            <span class="red" *ngIf="form.get('user')?.hasError('required')&& form.get('user')?.touched ">please
+              enter your user name</span>
+          </mat-form-field><br>
+        </div>
+
+        <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="5px">
+
+          <mat-form-field class="full-width" fxFlex color="accent">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" formControlName="fname" required>
+            <span class="red" *ngIf="form.get('fname')?.hasError('required')&& form.get('fname')?.touched ">please
+              enter
+              your firstname</span>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" fxFlex color="accent">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" formControlName="lname" required>
+            <span class="red" *ngIf="form.get('lname')?.hasError('required')&& form.get('lname')?.touched ">please
+              enter
+              your lastname</span>
+          </mat-form-field><br>
+
+        </div>
+        <mat-form-field class="full">
+          <mat-label>Address</mat-label>
+          <address>
+            <input matInput type="text" formControlName="add" required>
+            <span class="red" *ngIf="form.get('add')?.hasError('required')&& form.get('add')?.touched ">please
+              enter your address</span>
+          </address>
+        </mat-form-field><br>
+        <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="0px">
+          <mat-form-field class="full-wid" fxFlex color="accent">
+            <mat-label>City</mat-label>
+            <address>
+              <input matInput type="text" formControlName="city" required>
+              <span class="red" *ngIf="form.get('city')?.hasError('required')&& form.get('city')?.touched ">please
+                enter your city</span>
+            </address>
+          </mat-form-field>
+
+          <mat-form-field class="full-wid" fxFlex color="accent">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state">
+              <mat-option value="one">TamilNadu</mat-option>
+              <mat-option value="two">Kerala</mat-option>
+              <mat-option value="three">Goa</mat-option>
+              <mat-option value="four">Ladakh</mat-option>
+              <!-- <span class="red" 
+          *ngIf="form.get('state')?.hasError('required') && form.get('state')?.touched">please enter
+         your number</span>  -->
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-wid" fxFlex color="accent">
+            <mat-label>Zip</mat-label>
+            <input matInput formControlName="zip" type="number" required>
+            <span class="red" *ngIf="form.get('zip')?.hasError('required')&& form.get('zip')?.touched ">please
+              enter your zip number</span>
+          </mat-form-field><br>
+        </div>
+        <mat-form-field class="full">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="descrip" required></textarea>
+          <span class="red" *ngIf="form.get('descrip')?.hasError('required')&& form.get('descrip')?.touched ">please
+            enter your description</span>
+        </mat-form-field><br>
+
+        <button mat-raised-button [disabled]="!form.valid">Save</button>
+        <!-- <button mat-stroked-button (click)="openSnackBar('success')">Show snack-bar</button> -->
+
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
