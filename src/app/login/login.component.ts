@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LoginData } from './login';
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from "angularx-social-login";
 
 
 @Component({
@@ -10,19 +14,35 @@ import { LoginData } from './login';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit,LoginData {
-
-user!:LoginData;
+export class LoginComponent implements OnInit {
 
   constructor(private http: HttpClient,
-    private router: Router,
+    private router: Router,private authService: SocialAuthService
   ) { }
+  user: SocialUser | undefined;
+  loggedIn: boolean | undefined;
   formdata = new FormGroup({
     emailid: new FormControl('', Validators.required),
     passwd: new FormControl('', Validators.required)
   });
 
   ngOnInit(): void {
+    this.authService.authState.subscribe(user => {
+      this.user = user;
+      this.loggedIn = user != null;
+    });
+  }
+  
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
   onSubmit() {
 

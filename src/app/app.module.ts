@@ -38,15 +38,14 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from '@ngx-gallery/lightbox';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from "angularx-social-login";
 
 
-// @NgModule({
-//  imports: [
-//     // ...
-//     GalleryModule
-//  ]
-// })
-// import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
@@ -90,13 +89,33 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
     ScrollingModule,
     NgImageSliderModule,
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    SocialLoginModule
     
       
     
 
   ],
-  providers: [AuthGuard,RoleGuard],
+  providers: [AuthGuard,RoleGuard,{
+    provide: "SocialAuthServiceConfig",
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            "669942312628-q11p4ebfgujdk5bmbd66n8bl2a5ppt6q.apps.googleusercontent.com"
+          )
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("229459261889027")
+        }
+      ]
+    } as SocialAuthServiceConfig
+  }
+   
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
