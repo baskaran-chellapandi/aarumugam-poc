@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe(user => {
       this.user = user;
       this.loggedIn = user != null;
-    });
+    });console.log(this.user)
+    // this.http.post('http://localhost:3000/register',this.user).subscribe(response=>{
+
+    // });
   }
   
   signInWithGoogle(): void {
