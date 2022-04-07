@@ -10,7 +10,7 @@ import { ConfirmPasswordValidator } from './confirm';
 })
 
 export class RegisterComponent implements OnInit {
-  
+  userValue:any;
   constructor(private http: HttpClient,
     private router: Router
   ) { }
@@ -66,6 +66,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   
+  }
+  ParentComponent(data:any){
+      console.log(data)
+      this.formdata.patchValue({
+               user:data.lastName,
+              fname:data.firstName,
+              lname:data.lastName,
+              emailid:data.email,
+              profile:data.photoUrl,
+        
+      })
   }
 
  
