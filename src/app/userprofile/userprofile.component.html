@@ -1,0 +1,115 @@
+<div fxLayout.xs="column" fxLayoutAlign="center" class="body"  >
+<mat-card class="main" >
+  <mat-card-content>
+    <div class="navg">
+      <img class="img" src={{data?.profile}}><br>
+      <h3>{{data?.user}}</h3>
+      <button mat-raised-button (click)="addFriend()" style="background-color: blue;color: white;">Add Friend</button><br>
+      <a href="mailto:{{data?.emailid}}">{{data?.emailid}}</a>
+    </div>
+    <span style="font-weight: 450;">Description</span>
+    <p>{{data?.descrip}}</p>
+  </mat-card-content>
+</mat-card>
+<div class="container">
+  <p *ngFor="let item of global">
+    <mat-card class="createpost">
+      <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{data?.profile}}">
+      <span class="dora"> {{data?.user}} </span>
+      <span style="padding-left: 10px;position: absolute;margin-top: 20px;">{{item.time|dateAgo}}</span>
+      <br>
+      <span>{{item.quotes}}</span><br>
+      <img *ngFor="let img of item.post" [src]="img" class="inputImage">
+    </mat-card>
+  </p>
+
+</div>
+<mat-card class="mainCls">
+  <mat-card-content>
+    <form [formGroup]="form">
+      <!-- <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="5px"> -->
+        <mat-form-field class="full-width" >
+          <mat-label>Email Address</mat-label>
+          <input matInput type="email" formControlName="emailid" required [readonly]="true">
+          <span class="red" *ngIf="form.get('emailid')?.hasError('required')&& form.get('emailid')?.touched ">please
+            enter your email</span>
+          <!-- <span class="red" *ngIf="form.get('emailid')?.invalid">please enter valid email </span> -->
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width" >
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="user" required [readonly]="true">
+          <span class="red" *ngIf="form.get('user')?.hasError('required')&& form.get('user')?.touched ">please
+            enter your user name</span>
+        </mat-form-field><br>
+      <!-- </div>  -->
+
+       <!-- <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="5px">  -->
+
+        <mat-form-field class="full-width">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" formControlName="fname" required [readonly]="true">
+          <span class="red" *ngIf="form.get('fname')?.hasError('required')&& form.get('fname')?.touched ">please
+            enter
+            your firstname</span>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width" >
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" formControlName="lname" required [readonly]="true">
+          <span class="red" *ngIf="form.get('lname')?.hasError('required')&& form.get('lname')?.touched ">please
+            enter
+            your lastname</span>
+        </mat-form-field><br>
+
+      <!-- </div> -->
+      <mat-form-field class="full">
+        <mat-label>Address</mat-label>
+        <address>
+          <input matInput type="text" formControlName="add" required [readonly]="true">
+          <span class="red" *ngIf="form.get('add')?.hasError('required')&& form.get('add')?.touched ">please
+            enter your address</span>
+        </address>
+      </mat-form-field><br>
+      <!-- <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="0px"> -->
+        <mat-form-field class="full-wid" >
+          <mat-label>City</mat-label>
+          <address>
+            <input matInput type="text" formControlName="city" required [readonly]="true">
+            <span class="red" *ngIf="form.get('city')?.hasError('required')&& form.get('city')?.touched ">please
+              enter your city</span>
+          </address>
+        </mat-form-field>
+
+        <mat-form-field class="full-wid" >
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" [disabled]="true">
+            <mat-option value="one">TamilNadu</mat-option>
+            <mat-option value="two">Kerala</mat-option>
+            <mat-option value="three">Goa</mat-option>
+            <mat-option value="four">Ladakh</mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-wid">
+          <mat-label>Zip</mat-label>
+          <input matInput formControlName="zip" type="number" required [readonly]="true">
+          <span class="red" *ngIf="form.get('zip')?.hasError('required')&& form.get('zip')?.touched ">please
+            enter your zip number</span>
+        </mat-form-field><br>
+      <!-- </div> -->
+      <mat-form-field class="full">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="descrip" required [readonly]="true"></textarea>
+        <span class="red" *ngIf="form.get('descrip')?.hasError('required')&& form.get('descrip')?.touched ">please
+          enter your description</span>
+      </mat-form-field><br>
+
+     
+
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+</div>

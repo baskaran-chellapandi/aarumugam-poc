@@ -5,18 +5,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './shared/auth.guard';
 import { RoleGuard } from './shared/role.guard';
-import { DialogueComponent } from './dialogue/dialogue.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ProfileComponent } from './profile/profile.component';
-
+// import { UserprofileComponent} from './userprofile/userprofile.component'
+import { UserprofileComponent} from './userprofile/userprofile.component'
+import { RequestComponent } from './request/request.component';
 
 const routes: Routes = [
   { path:"",component:LoginComponent,canActivate:[RoleGuard]},
   { path:"register",component:RegisterComponent},
   {path:"dashboard",component:DashboardComponent},
-  {path:"dialogue",component:DialogueComponent},
   {path:"newsfeed",component:NewsfeedComponent,canActivate:[AuthGuard]},
-  {path:"profile",component:ProfileComponent}
+  {path:"profile",component:ProfileComponent},
+  {path:"userprofile",component:UserprofileComponent},
+  {path:"request",component:RequestComponent}
 ];
 
 @NgModule({
