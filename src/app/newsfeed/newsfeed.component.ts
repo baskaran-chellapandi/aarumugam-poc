@@ -74,6 +74,7 @@ export class NewsfeedComponent implements OnInit,DateAgoPipe
         this.images = response.profile;
         this.name=response.user  
       })
+      // friend request
       this.http.get<any>("http://localhost:3000/friend/".concat(this.userObject)).subscribe(response=>{
          this.reqimg=response.profile;
          this.reqname=response.user

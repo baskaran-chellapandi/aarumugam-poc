@@ -15,6 +15,8 @@
     </mat-autocomplete>
     <!-- <mat-icon>keyboard_arrow_down</mat-icon> -->
   </mat-form-field>
+  <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{reqimg}}">
+        <span > {{reqname}} </span>
   <span class="example-spacer"></span>
   <nav>
     <ul>
@@ -24,9 +26,9 @@
           <li (click)="opendashboard()">
             <mat-icon>settings</mat-icon>Settings
           </li><br>
-          <!-- <li>
-            <mat-icon (click)="logout()">logout</mat-icon>Logout
-          </li> -->
+          <li (click)="logout()">
+            <mat-icon >logout</mat-icon>Logout
+          </li>
         </ul>
       </li>
       <li>
@@ -113,13 +115,12 @@
     </p>
    
 </div>
-<div>
-  <mat-icon>
+<!-- <div>
+  <mat-card style="max-width: 200px;float: right;">
     <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{reqimg}}">
         <span class="dora"> {{reqname}} </span>
-        <!-- <span style="padding-left: 10px;position: absolute;margin-top: 20px;">{{item.time|dateAgo}}</span> -->
-  </mat-icon>
-</div>
+  </mat-card>
+</div> -->
 
 <!-- </div> -->
 

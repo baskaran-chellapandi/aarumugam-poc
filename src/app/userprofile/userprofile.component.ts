@@ -77,7 +77,7 @@ postvalue:any;
 
     this.http.get<any>("http://localhost:3000/register/".concat(this.userObject))
       .subscribe(response => {
-      this.datas=response
+      this.datas=response.user
       console.log(this.datas)
       this.http.post('http://localhost:3000/friend',this.datas).subscribe(response=>{
        this.postvalue=response
