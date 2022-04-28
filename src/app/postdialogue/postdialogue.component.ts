@@ -44,10 +44,7 @@ export class PostdialogueComponent implements OnInit {
     this.userObject = users.id
     this.http.get<any>("http://localhost:3000/register/".concat(this.userObject))
       .subscribe(response => {
-        
-        this.image = response.profile;
-        
-        
+        this.image = response.profile;  
       })
   }
 

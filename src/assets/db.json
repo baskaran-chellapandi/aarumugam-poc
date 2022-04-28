@@ -86,10 +86,13 @@
   ],
   "friend": [
     {
-      "user": "Sundar",
+      "receiver": "Bharathy",
+      "sender": "Sunil",
       "id": 1
     },
     {
+      "receiver": "Bharathy",
+      "sender": "Bharathy",
       "id": 2
     }
   ]

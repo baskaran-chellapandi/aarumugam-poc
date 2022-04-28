@@ -1,6 +1,6 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NewData} from './userprofile';
+import { NewData } from './userprofile';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -11,15 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
-data!: NewData;
-global:any;
-base:any;
-id:any;
-idNum:any;
-userObject:any;
-datas:any;
-postvalue:any;
-  constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
+  data!: NewData;
+  global: any;
+  base: any;
+  id: any;
+  idNum: any;
+  userObject: any;
+  username: any;
+  postvalue: any;
+  showElement: boolean = true;
+  uservalue: any;
+  public text: string = 'Add Friend';
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   // @Input() item=0;
   form = new FormGroup({
@@ -35,54 +38,79 @@ postvalue:any;
   });
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params:any) => {
+    this.route.queryParams.subscribe((params: any) => {
       // console.log(params)
       this.id = params.data;
-    });console.log(this.id)
+    }); console.log(this.id)
 
     this.http.get<any>("http://localhost:3000/post?_sort=id&_order=desc")
-    .subscribe(response =>{
-    this.global=response
-    for(let item of this.global){
-      const arr: Array<object> = []
-      for (let image of item.post) {     
-        arr.push({
-                  src: image,
-                  thumb: image,
-                });
-      }
-    }
-  });
-  // console.log(this.id)
-    this.http.get<any>('http://localhost:3000/register/'.concat(this.id)).subscribe(response=>{
-     this.data = response
-     this.form.patchValue({
-       user: this.data.user,
-       emailid: this.data.emailid,
-       fname: this.data.fname,
-       lname: this.data.lname,
-       add: this.data.add,
-       city: this.data.city,
-       zip: this.data.zip,
-       descrip: this.data.descrip,
-       state: this.data.state
+      .subscribe(response => {
+        this.global = response
+        for (let item of this.global) {
+          const arr: Array<object> = []
+          for (let image of item.post) {
+            arr.push({
+              src: image,
+              thumb: image,
+            });
+          }
+        }
+      });
+    // console.log(this.id)
+    this.http.get<any>('http://localhost:3000/register/'.concat(this.id)).subscribe(response => {
+      this.data = response
+      this.form.patchValue({
+        user: this.data.user,
+        emailid: this.data.emailid,
+        fname: this.data.fname,
+        lname: this.data.lname,
+        add: this.data.add,
+        city: this.data.city,
+        zip: this.data.zip,
+        descrip: this.data.descrip,
+        state: this.data.state
 
-     })
-     
+      })
+
     })
   }
-  addFriend(){
+  // friend request sender
+  addFriend() {
+    if(this.text === 'Add Friend') { 
+          this.text = 'Request send'
+        } else {
+          this.text = 'Friends'
+        }
     const users = JSON.parse(localStorage.getItem('data') || '{}')
     this.userObject = users.id
-
     this.http.get<any>("http://localhost:3000/register/".concat(this.userObject))
       .subscribe(response => {
-      this.datas=response.user
-      console.log(this.datas)
-      this.http.post('http://localhost:3000/friend',this.datas).subscribe(response=>{
-       this.postvalue=response
+        this.username = response.user
+        console.log(this.username)
+
+      });
+    // friend request receiver
+    this.http.get<any>('http://localhost:3000/register/'.concat(this.id)).subscribe(response => {
+      this.uservalue = response.user
+      console.log(this.uservalue)
+    })
+    setTimeout(() => {
+      var value = { receiver: this.uservalue, sender: this.username };
+      this.http.post('http://localhost:3000/friend', value).subscribe(response => {
+        this.postvalue = response
+        console.log(this.postvalue)
       })
-    });
+      this.showElement = false;
+    }, 2000);
+
   }
+  // public changeText(): void {
+  //   if(this.text === 'Add Friend') { 
+  //     this.text = 'Request send'
+  //   } else {
+  //     this.text = 'Friends'
+  //   }
+  // }
+
 
 }

@@ -15,8 +15,8 @@
     </mat-autocomplete>
     <!-- <mat-icon>keyboard_arrow_down</mat-icon> -->
   </mat-form-field>
-  <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{reqimg}}">
-        <span > {{reqname}} </span>
+  <!-- <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{reqimg}}">-->
+        <!-- <span > {{receiver}} </span>  -->
   <span class="example-spacer"></span>
   <nav>
     <ul>
@@ -81,9 +81,14 @@
     </p>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- </div> -->
-
-<!-- <div class="item"> -->
+<div>
+  <mat-card style="max-width: 200px;float: right;">
+  
+       <span > {{sender}} send you a friend request</span>
+       <button mat-raised-button style="color: blue;">Confirm</button>
+       <button mat-raised-button style="color: blue;padding-right: 5px;">Delete</button>
+ </mat-card>
+</div> 
 <div class="text-center">
     <mat-card class="createpost">
       <p>Create Post</p>
@@ -115,12 +120,7 @@
     </p>
    
 </div>
-<!-- <div>
-  <mat-card style="max-width: 200px;float: right;">
-    <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{reqimg}}">
-        <span class="dora"> {{reqname}} </span>
-  </mat-card>
-</div> -->
+
 
 <!-- </div> -->
 

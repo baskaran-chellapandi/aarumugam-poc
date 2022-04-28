@@ -42,8 +42,8 @@ export class NewsfeedComponent implements OnInit,DateAgoPipe
   // Observable<string[]> | undefined;
   jsonControl = new FormControl();
   num:any;
-  reqimg:any;
-  reqname:any;
+  sender:any;
+  receiver:any;
 
 
   constructor(private router: Router, 
@@ -76,8 +76,10 @@ export class NewsfeedComponent implements OnInit,DateAgoPipe
       })
       // friend request
       this.http.get<any>("http://localhost:3000/friend/".concat(this.userObject)).subscribe(response=>{
-         this.reqimg=response.profile;
-         this.reqname=response.user
+         this.sender=response.sender;
+         this.receiver=response.receiver
+         console.log(this.sender);
+         console.log(this.receiver);
       })
       this.http.get<NewsData>("http://localhost:3000/post?_sort=id&_order=desc")
       .subscribe(response =>{
