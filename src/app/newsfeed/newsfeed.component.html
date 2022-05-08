@@ -1,18 +1,50 @@
+<div style="width: 100%;height: 100%;">
 <mat-toolbar style="max-height: 50px;">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon (click)="toggle(sidenav)">menu</mat-icon>
   </button>
+  <mat-form-field style="padding-left: 15%;width: 40%;">
+    <mat-label>
+      <mat-icon>search</mat-icon>Search
+    </mat-label>
+    <input matInput type="text" [formControl]="jsonControl" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions  | async" [value]="option.user">
+        <img class="autoimg" src="{{option.profile}}" (click)="autoComplete(option.id)"><span
+          style="position: absolute ;margin-top:0.2rem; padding-left: 5px;">{{option.user}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
   <span class="example-spacer"></span>
   <nav>
     <ul>
+      <li><mat-icon class="notification" >notifications</mat-icon>
+
+    <ul> 
+      <mat-card style="max-width: 500px; height: 500px; float: right;padding-right: 70% !important;">
+      <li *ngFor="let idea of finalValue">
+        
+          <span> {{idea?.user}} send you a friend request</span><br>
+          <button mat-raised-button style="color:white;background-color: blue;"(click)="requestconform($event.target, 'Friends')">Confirm</button>
+          <button mat-raised-button style="color: white;background-color: gray; margin-left: 15px;"(click)="Deleterequest()">Delete</button><br>
+          <mat-divider></mat-divider>
+      </li>
+    </mat-card>
+    </ul>
+  </li>
+
+     
+
+    
+     
       <li> <img class="image" src="{{images}}"></li>
       <li>{{name}}
         <ul>
           <li (click)="opendashboard()">
             <mat-icon>settings</mat-icon>Settings
           </li><br>
-          <li>
-            <mat-icon (click)="logout()">logout</mat-icon>Logout
+          <li (click)="logout()">
+            <mat-icon >logout</mat-icon>Logout
           </li>
         </ul>
       </li>
@@ -25,51 +57,56 @@
 
 
 
+<!-- <div class="container">
+  <div class="item"> -->
+<mat-sidenav-container style="position: fixed;">
+  <mat-sidenav #sidenav mode="side" closed class="sidenav">
+    <mat-nav-list style="width: 150px;z-index: 9999;">
+      <a mat-list-item>
+        <label>Newsfeed</label>
+      </a>
+      <a mat-list-item>
 
-<div class="container">
-  <div class="item">
-    <mat-sidenav-container style="position: fixed;">
-      <mat-sidenav #sidenav mode="side" closed class="sidenav">
-        <mat-nav-list style="width: 150px;z-index: 9999;">
-          <a mat-list-item>
-            <label>Newsfeed</label>
-          </a>
-          <a mat-list-item>
+        <label>Profile</label>
+      </a>
+      <a mat-list-item>
 
-            <label>Profile</label>
-          </a>
-          <a mat-list-item>
+        <label>Friend List</label>
+      </a>
+      <a mat-list-item>
 
-            <label>Friend List</label>
-          </a>
-          <a mat-list-item>
+        <label>Friend profile</label>
+      </a>
+      <a mat-list-item>
 
-            <label>Friend profile</label>
-          </a>
-          <a mat-list-item>
+        <label>Group</label>
+      </a>
+      <a mat-list-item>
 
-            <label>Group</label>
-          </a>
-          <a mat-list-item>
+        <label>Profile Image</label>
+      </a>
+      <a mat-list-item>
 
-            <label>Profile Image</label>
-          </a>
-          <a mat-list-item>
+        <label>Notification</label>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <p style="height: 85vh;">
+      <router-outlet> </router-outlet>
+    </p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- <p *ngFor="let data of value">
+  <mat-card style="max-width: 500px; height: 500px; float: right;padding-right: 50% !important;">
+    <span> {{data}}send you a friend request</span><br>
+    <button mat-raised-button style="color:white;background-color: blue;">Confirm</button>
+    <button mat-raised-button style="color: white;background-color: gray; margin-left: 15px;">Delete</button>
+  </mat-card>
+</p> -->
 
-            <label>Notification</label>
-          </a>
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <p style="height: 85vh;">
-          <router-outlet> </router-outlet>
-        </p>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
 
-  <div class="item">
-
+<div class="text-center">
     <mat-card class="createpost">
       <p>Create Post</p>
       <img class="postImage" src="{{images}}">
@@ -85,30 +122,23 @@
 
       <mat-card class="createpost">
         <img style="height: 35px;width: 35px;border-radius: 50%;margin-top: 3px;" src="{{images}}">
-        <span class="dora"> {{name}}</span>
+        <span class="dora"> {{name}} </span>
         <span style="padding-left: 10px;position: absolute;margin-top: 20px;">{{item.time|dateAgo}}</span>
         <br>
         <span>{{item.quotes}}</span><br>
 
         <div class="gallerize-example">
-          <p  >
-  
-          <img *ngFor="let img of base[item.id] index as i" [src]="img.data.src" [lightbox]="i"
-          [gallery]="item.id" class="inputImage" >
-         </p>
+          <p>
+            <img *ngFor="let img of base[item.id] index as i" [src]="img.data.src" [lightbox]="i" [gallery]="item.id"
+              class="inputImage">
+          </p>
         </div>
-        
-        <!-- {{ getImage(item) | json }} -->
-        <!-- <ng-image-fullscreen-view 
-        
-        [images]="getImage(item)"
-        [show]="showFlag"
-        (close)="closeEventHandler()">
-        </ng-image-fullscreen-view> -->
-
-
       </mat-card>
     </p>
-  </div>
-
+   
 </div>
+</div>
+
+<!-- </div> -->
+
+<!-- </div> -->

@@ -3,5 +3,4 @@ patchValue:any;
 quotes:string;
 post:any;
 time:any;
-
 }

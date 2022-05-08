@@ -25,7 +25,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DialogueComponent } from './dialogue/dialogue.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PickerModule } from '@ctrl/ngx-emoji-mart'
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -38,12 +37,15 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from '@ngx-gallery/lightbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
   GoogleLoginProvider,
   FacebookLoginProvider
 } from "angularx-social-login";
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { RequestComponent } from './request/request.component';
 
 
 
@@ -53,11 +55,12 @@ import {
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    DialogueComponent,
     NewsfeedComponent,
     PostdialogueComponent,
     ProfileComponent,
     DateAgoPipe,
+    UserprofileComponent,
+    RequestComponent,
     // TimeAgoPipe
     
   ],
@@ -90,7 +93,8 @@ import {
     NgImageSliderModule,
     GalleryModule,
     LightboxModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatAutocompleteModule
     
       
     

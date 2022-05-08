@@ -5,7 +5,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DashData } from './dashboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogueComponent } from '../dialogue/dialogue.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  @Output() ParentComponet:EventEmitter<any> = new EventEmitter()
   constructor(private http: HttpClient,
     private router: Router,private authService: SocialAuthService
   ) { }
@@ -28,12 +28,29 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.authState.subscribe(user => {
+    
       this.user = user;
       this.loggedIn = user != null;
-    });console.log(this.user)
-    // this.http.post('http://localhost:3000/register',this.user).subscribe(response=>{
 
-    // });
+      this.http.get<any>('http://localhost:3000/register')
+      .subscribe(response => {
+        const users = response.find((a: any) => {
+        return a.emailid === this.user?.email          
+          });
+       if(users){
+         var myObj = { id: users.id, emailid: users.emailid, fname: users.fname }
+         localStorage.setItem('data', JSON.stringify(myObj))
+         this.formdata.reset();
+         this.router.navigate(['newsfeed'])
+
+     } else {
+    
+       this.ParentComponet.emit(this.user)
+      
+     }   
+      })
+    });
+    
   }
   
   signInWithGoogle(): void {
@@ -51,10 +68,8 @@ export class LoginComponent implements OnInit {
 
     this.http.get<any>('http://localhost:3000/register')
       .subscribe(response => {
-
         const user = response.find((a: any) => {
-
-          return a.emailid === this.formdata.value.emailid && a.passwd === this.formdata.value.passwd
+          return a.emailid === this.formdata.value.emailid && a.passwd === this.formdata.value.passwd 
         });
 
 
@@ -69,6 +84,7 @@ export class LoginComponent implements OnInit {
         }
 
       });
+     
 
 
   }
